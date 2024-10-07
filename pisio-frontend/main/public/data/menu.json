@@ -1,0 +1,117 @@
+{
+  "menu": [
+    {
+      "route": "dashboard",
+      "name": "dashboard",
+      "type": "link",
+      "icon": "dashboard",
+      "badge": {
+        "color": "red-50",
+        "value": "5"
+      }
+    },
+    
+    
+    {
+      "route": "media",
+      "name": "media",
+      "type": "sub",
+      "icon": "image",
+      "children": [
+        {
+          "route": "gallery",
+          "name": "gallery",
+          "type": "link"
+        }
+      ]
+    },
+    {
+      "route": "forms",
+      "name": "forms",
+      "type": "sub",
+      "icon": "description",
+      "children": [
+        {
+          "route": "elements",
+          "name": "form-elements",
+          "type": "link"
+        },
+        {
+          "route": "dynamic",
+          "name": "dynamic-form",
+          "type": "link"
+        },
+        {
+          "route": "select",
+          "name": "select",
+          "type": "link"
+        },
+        {
+          "route": "datetime",
+          "name": "datetime",
+          "type": "link"
+        }
+      ],
+      "permissions": {
+        "except": "GUEST"
+      }
+    },
+    {
+      "route": "tables",
+      "name": "tables",
+      "type": "sub",
+      "icon": "format_line_spacing",
+      "children": [
+        {
+          "route": "kitchen-sink",
+          "name": "kitchen-sink",
+          "type": "link"
+        },
+        {
+          "route": "remote-data",
+          "name": "remote-data",
+          "type": "link"
+        }
+      ],
+      "permissions": {
+        "except": "GUEST"
+      }
+    },
+    
+    {
+      "route": "https://ng-matero.github.io/extensions/",
+      "name": "extensions",
+      "type": "extTabLink",
+      "icon": "extension",
+      "permissions": {
+        "only": "ADMIN"
+      }
+    },
+    {
+      "route": "/",
+      "name": "sessions",
+      "type": "sub",
+      "icon": "question_answer",
+      "children": [
+        {
+          "route": "403",
+          "name": "403",
+          "type": "link"
+        },
+        {
+          "route": "404",
+          "name": "404",
+          "type": "link"
+        },
+        {
+          "route": "500",
+          "name": "500",
+          "type": "link"
+        }
+      ],
+      "permissions": {
+        "only": "ADMIN"
+      }
+    }
+  ]
+}
