@@ -1,0 +1,28 @@
+.mat-form-field {
+    margin: 0 8px;
+    
+  }
+
+.example-full-width{
+    margin-top: 5px;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+textarea::placeholder {
+    color: rgba(248, 248, 255, 0.874);
+}
+mat-form-field{
+
+    color: white
+    
+}
+
+.image-incident{
+    border-radius: 10%;
+}
+
+button:disabled{
+
+    background-color: grey;
+}

@@ -2,6 +2,9 @@ import { Injectable, inject } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { delay, map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
+import { Incident } from 'app/models/incident';
+import { IncidentRequest } from 'app/models/incident_request';
+
 
 export interface Person {
   id: string;
@@ -15,9 +18,54 @@ export interface Person {
   disabled?: boolean;
 }
 
+
+
 @Injectable()
 export class DataService {
+
+
+  private url_incident_types: string="http://localhost:8080/incident_types";
+  private url_incident_subtypes: string="http://localhost:8080/incident_subtypes";
+  private url_incidents: string="http://localhost:8080/incidents";
   private http = inject(HttpClient);
+
+  
+  //mine
+  getIncidentTypes() : Observable<any[]>{
+    
+    return this.http.get<any[]>(`${this.url_incident_types}`)
+  }
+
+  getIncidentType(id: number) :Observable<any>{
+
+    return this.http.get<any>(`${this.url_incident_types}/${id}`)
+
+  }
+  getIncidentSubtypes(): Observable<any[]>{
+    
+    return this.http.get<any[]>(`${this.url_incident_subtypes}`)
+  }
+  
+  insertIncident(incidentRequest: IncidentRequest): Observable<Incident>{
+
+    console.log('Incident data to be sent:', JSON.stringify(incidentRequest, null, 2));
+    return this.http.post<Incident>(`${this.url_incidents}`, incidentRequest);
+  }
+  
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
 
   getGithubAccounts(term?: string) {
     if (term) {
@@ -45,7 +93,7 @@ export class DataService {
     return of(items).pipe(delay(500));
   }
 }
-
+ 
 function getMockPeople() {
   return [
     {

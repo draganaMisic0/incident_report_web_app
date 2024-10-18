@@ -1,0 +1,41 @@
+INSERT INTO `incident_report`.`incident_subtype` (`name`) VALUES ('chain traffic accident');
+INSERT INTO `incident_report`.`incident_subtype` (`name`) VALUES ('single vehicle crash');
+INSERT INTO `incident_report`.`incident_subtype` (`name`) VALUES ('animal collisions');
+INSERT INTO `incident_report`.`incident_subtype` (`name`) VALUES ('drunk driver accident');
+INSERT INTO `incident_report`.`incident_subtype` (`name`) VALUES ('rollover accident');
+
+
+INSERT INTO `incident_report`.`incident_type` (`name`) VALUES ('traffic accident');
+UPDATE `incident_report`.`incident_subtype` SET `incident_type_id` = '1' WHERE (`id` = '1');
+UPDATE `incident_report`.`incident_subtype` SET `incident_type_id` = '1' WHERE (`id` = '2');
+UPDATE `incident_report`.`incident_subtype` SET `incident_type_id` = '1' WHERE (`id` = '3');
+UPDATE `incident_report`.`incident_subtype` SET `incident_type_id` = '1' WHERE (`id` = '4');
+UPDATE `incident_report`.`incident_subtype` SET `incident_type_id` = '1' WHERE (`id` = '5');
+
+INSERT INTO `incident_report`.`incident_type` (`name`) VALUES ('flood');
+INSERT INTO `incident_report`.`incident_type` (`name`) VALUES ('theft');
+INSERT INTO `incident_report`.`incident_type` (`name`) VALUES ('fire');
+INSERT INTO `incident_report`.`incident_type` (`name`) VALUES ('vandalism');
+INSERT INTO `incident_report`.`incident_type` (`name`) VALUES ('other');
+
+INSERT INTO `incident_report`.`incident_subtype` (`name`, `incident_type_id`) VALUES ('dam failure', '2');
+INSERT INTO `incident_report`.`incident_subtype` (`name`, `incident_type_id`) VALUES ('incland flooding', '2');
+INSERT INTO `incident_report`.`incident_subtype` (`name`, `incident_type_id`) VALUES ('coastal flooding', '2');
+
+INSERT INTO `incident_report`.`incident_subtype` (`name`, `incident_type_id`) VALUES ('burglary', '3');
+INSERT INTO `incident_report`.`incident_subtype` (`name`, `incident_type_id`) VALUES ('robbery', '3');
+INSERT INTO `incident_report`.`incident_subtype` (`name`, `incident_type_id`) VALUES ('shoplifting', '3');
+INSERT INTO `incident_report`.`incident_subtype` (`name`, `incident_type_id`) VALUES ('car theft', '3');
+
+INSERT INTO `incident_report`.`incident_subtype` (`name`, `incident_type_id`) VALUES ('building fire', '4');
+INSERT INTO `incident_report`.`incident_subtype` (`name`, `incident_type_id`) VALUES ('trash can fire', '4');
+INSERT INTO `incident_report`.`incident_subtype` (`name`, `incident_type_id`) VALUES ('forest fire', '4');
+INSERT INTO `incident_report`.`incident_subtype` (`name`, `incident_type_id`) VALUES ('property damage', '5');
+INSERT INTO `incident_report`.`incident_subtype` (`name`, `incident_type_id`) VALUES ('looting', '5');
+INSERT INTO `incident_report`.`incident_subtype` (`name`, `incident_type_id`) VALUES ('tire slashing', '5');
+INSERT INTO `incident_report`.`incident_subtype` (`name`, `incident_type_id`) VALUES ('other', '1');
+INSERT INTO `incident_report`.`incident_subtype` (`name`, `incident_type_id`) VALUES ('other', '2');
+INSERT INTO `incident_report`.`incident_subtype` (`name`, `incident_type_id`) VALUES ('other', '3');
+INSERT INTO `incident_report`.`incident_subtype` (`name`, `incident_type_id`) VALUES ('other', '4');
+INSERT INTO `incident_report`.`incident_subtype` (`name`, `incident_type_id`) VALUES ('other', '5');
+

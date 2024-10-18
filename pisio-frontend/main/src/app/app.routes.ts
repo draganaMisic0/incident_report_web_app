@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-import { authGuard } from '@core';
 import { AdminLayoutComponent } from '@theme/admin-layout/admin-layout.component';
 import { AuthLayoutComponent } from '@theme/auth-layout/auth-layout.component';
 import { DashboardComponent } from './routes/dashboard/dashboard.component';
@@ -8,13 +7,13 @@ import { Error404Component } from './routes/sessions/404.component';
 import { Error500Component } from './routes/sessions/500.component';
 import { LoginComponent } from './routes/sessions/login/login.component';
 import { RegisterComponent } from './routes/sessions/register/register.component';
+import { MapComponent } from './routes/map/map.component';
 
 export const routes: Routes = [
   {
     path: '',
     component: AdminLayoutComponent,
-    canActivate: [authGuard],
-    canActivateChild: [authGuard],
+    
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: 'dashboard', component: DashboardComponent },
@@ -24,8 +23,8 @@ export const routes: Routes = [
       
      
       {
-        path: 'media',
-        loadChildren: () => import('./routes/media/media.routes').then(m => m.routes),
+        path: 'map',
+        component: MapComponent
       },
       {
         path: 'forms',

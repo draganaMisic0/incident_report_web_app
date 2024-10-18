@@ -13,105 +13,41 @@
     
     
     {
-      "route": "media",
-      "name": "media",
-      "type": "sub",
-      "icon": "image",
-      "children": [
-        {
-          "route": "gallery",
-          "name": "gallery",
-          "type": "link"
-        }
-      ]
+      "name": "map",
+      "type": "link",
+      "icon": "map",
+      "route": "map"
     },
     {
-      "route": "forms",
-      "name": "forms",
-      "type": "sub",
-      "icon": "description",
-      "children": [
-        {
-          "route": "elements",
-          "name": "form-elements",
-          "type": "link"
-        },
-        {
-          "route": "dynamic",
-          "name": "dynamic-form",
-          "type": "link"
-        },
-        {
-          "route": "select",
-          "name": "select",
-          "type": "link"
-        },
-        {
-          "route": "datetime",
-          "name": "datetime",
-          "type": "link"
-        }
-      ],
-      "permissions": {
-        "except": "GUEST"
-      }
+      "route": "forms/select",
+      "name": "report",
+      "type": "link",
+      "icon": "description"
     },
+    
     {
       "route": "tables",
       "name": "tables",
       "type": "sub",
       "icon": "format_line_spacing",
       "children": [
+        
         {
-          "route": "kitchen-sink",
-          "name": "kitchen-sink",
+          "route": "list-of-incidents",
+          "name": "list-of-incidents",
           "type": "link"
         },
         {
-          "route": "remote-data",
-          "name": "remote-data",
+          "route": "pending-incidents",
+          "name": "pending-incidents",
           "type": "link"
         }
       ],
       "permissions": {
         "except": "GUEST"
       }
-    },
-    
-    {
-      "route": "https://ng-matero.github.io/extensions/",
-      "name": "extensions",
-      "type": "extTabLink",
-      "icon": "extension",
-      "permissions": {
-        "only": "ADMIN"
-      }
-    },
-    {
-      "route": "/",
-      "name": "sessions",
-      "type": "sub",
-      "icon": "question_answer",
-      "children": [
-        {
-          "route": "403",
-          "name": "403",
-          "type": "link"
-        },
-        {
-          "route": "404",
-          "name": "404",
-          "type": "link"
-        },
-        {
-          "route": "500",
-          "name": "500",
-          "type": "link"
-        }
-      ],
-      "permissions": {
-        "only": "ADMIN"
-      }
     }
+    
+     
   ]
 }

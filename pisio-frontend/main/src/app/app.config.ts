@@ -19,6 +19,7 @@ import { PaginatorI18nService } from '@shared';
 import { InMemDataService } from '@shared/in-mem/in-mem-data.service';
 import { routes } from './app.routes';
 import { FormlyConfigModule } from './formly-config';
+import { provideOAuthClient } from 'angular-oauth2-oidc';
 
 // Required for AOT compilation
 export function TranslateHttpLoaderFactory(http: HttpClient) {
@@ -28,6 +29,7 @@ export function TranslateHttpLoaderFactory(http: HttpClient) {
 export const appConfig: ApplicationConfig = {
   providers: [
     provideAnimationsAsync(),
+    provideOAuthClient(),
     provideHttpClient(withInterceptorsFromDi()),
     provideRouter(
       routes,

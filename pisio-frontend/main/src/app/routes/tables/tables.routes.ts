@@ -1,9 +1,9 @@
 import { Routes } from '@angular/router';
 
-import { TablesKitchenSinkComponent } from './kitchen-sink/kitchen-sink.component';
-import { TablesRemoteDataComponent } from './remote-data/remote-data.component';
+import { TablesKitchenSinkComponent } from './kitchen-sink/pending-incidents.component';
+import { TablesPendingIncidentsComponent } from './list-of-incidents/list-of-incidents.component';
 
 export const routes: Routes = [
-  { path: 'kitchen-sink', component: TablesKitchenSinkComponent },
-  { path: 'remote-data', component: TablesRemoteDataComponent },
+  { path: 'pending-incidents', component: TablesKitchenSinkComponent },
+  { path: 'list-of-incidents', component: TablesPendingIncidentsComponent },
 ];

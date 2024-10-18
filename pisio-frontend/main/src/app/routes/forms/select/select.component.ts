@@ -1,6 +1,6 @@
 import { AsyncPipe, JsonPipe } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
@@ -8,14 +8,28 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MtxSelectModule } from '@ng-matero/extensions/select';
 import { Observable } from 'rxjs';
-
+import {
+  MtxDatetimepickerFilterType,
+  MtxDatetimepickerModule,
+} from '@ng-matero/extensions/datetimepicker';
 import { PageHeaderComponent } from '@shared';
 import { DataService, Person } from '../data.service';
 import { FormsSelectEditComponent } from './edit/edit.component';
+import { ToastrService } from 'ngx-toastr';
+import { FormlyFieldConfig, FormlyModule } from '@ngx-formly/core';
+import moment from 'moment';
+import { DateAdapter } from '@angular/material/core';
+import { TranslateService } from '@ngx-translate/core';
+import { MatIconModule } from '@angular/material/icon';
+import { IncidentSelectionService } from 'app/services/incident-selection.service';
+
+
+
 
 @Component({
   selector: 'app-forms-selects',
   templateUrl: './select.component.html',
+  
   styleUrl: './select.component.scss',
   providers: [DataService],
   standalone: true,
@@ -23,24 +37,44 @@ import { FormsSelectEditComponent } from './edit/edit.component';
     AsyncPipe,
     JsonPipe,
     FormsModule,
+    ReactiveFormsModule,
+    FormlyModule,
     MatButtonModule,
     MatCardModule,
     MatDialogModule,
     MatDividerModule,
     MatFormFieldModule,
+    MatIconModule,
     MtxSelectModule,
+    MtxDatetimepickerModule,
     PageHeaderComponent,
-  ],
+    ReactiveFormsModule
+  ]
 })
 export class FormsSelectComponent implements OnInit {
+
+  userForm: FormGroup = {} as FormGroup;
   private readonly dialog = inject(MatDialog);
   private readonly dataService = inject(DataService);
+  private readonly toast = inject(ToastrService);
+
+
+  private readonly dateAdapter = inject(DateAdapter);
+  private readonly translate = inject(TranslateService);
 
   // Data source
   people$!: Observable<Person[]>;
   people: Person[] = [];
   selectedPersonId = '5a15b13c36e7a7f00cf0d7cb';
   selectedPersonId2 = '5a15b13c36e7a7f00cf0d7cb';
+  group: FormGroup;
+  tomorrow: moment.Moment;
+  today: moment.Moment;
+  min: moment.Moment;
+  max: moment.Moment;
+  start: moment.Moment;
+  filter: (date: moment.Moment | null, type: MtxDatetimepickerFilterType) => boolean;
+
 
   selectedSimpleItem = 'Two';
   simpleItems: any[] = [];
@@ -61,15 +95,207 @@ export class FormsSelectComponent implements OnInit {
   selectedCompany = null;
   selectedCompanyCustom = null;
   selectedCompanyCustomPromise = null;
+  incidentTypes : any[]=[];
+  selectedIncidentType: number | null=null;
+  incidentSubtypes : any[]=[];
+  filteredIncidentSubtypes: any[]=[];
+  incidentDescription: string= "";
+  imageUrl: string | ArrayBuffer | null = null;
+  isSubmitDisabled=true;
+ 
 
+  constructor(private incidentSelector: IncidentSelectionService, private fb: FormBuilder) {
+    this.today = moment.utc();
+    this.tomorrow = moment.utc().date(moment.utc().date() + 1);
+    this.min = this.today.clone().year(2018).month(10).date(3).hour(11).minute(10);
+    this.max = this.min.clone().date(4).minute(45);
+    this.start = this.today.clone().year(1930).month(9).date(28);
+    this.filter = (date: moment.Moment | null, type: MtxDatetimepickerFilterType) => {
+      if (date === null) {
+        return true;
+      }
+      switch (type) {
+        case MtxDatetimepickerFilterType.DATE:
+          return date.year() % 2 === 0 && date.month() % 2 === 0 && date.date() % 2 === 0;
+        case MtxDatetimepickerFilterType.HOUR:
+          return date.hour() % 2 === 0;
+        case MtxDatetimepickerFilterType.MINUTE:
+          return date.minute() % 2 === 0;
+      }
+
+      this.userForm = this.fb.group({
+        incidentControl: ['', Validators.required],
+        dateTimeControl: ['', Validators.required],
+        subtypeControl: ['', Validators.required]
+
+      })
+    };
+
+    this.group = this.fb.group({
+      dateTime: [new Date('2017-11-09T12:10:00.000Z'), Validators.required],
+      dateTimeManual: [new Date('2017-11-09T12:10:00.000Z'), Validators.required],
+      dateTimeYear: [new Date('2017-11-09T12:10:00.000Z'), Validators.required],
+      date: [null, Validators.required],
+      time: [null, Validators.required],
+      timeAMPM: [null, Validators.required],
+      timeAMPMManual: [null, Validators.required],
+      month: [null, Validators.required],
+      year: [null, Validators.required],
+      mintest: [this.today, Validators.required],
+      filtertest: [this.today, Validators.required],
+      touch: [null, Validators.required],
+    });
+    
+  }
   ngOnInit() {
+
+
+   
+    this.dataService.getIncidentTypes().subscribe((result: any[]) => {
+
+      this.incidentTypes=result;
+      
+    });
+
+    this.dataService.getIncidentSubtypes().subscribe((result: any[])=>{
+
+      this.incidentSubtypes=result;
+
+    })
+
+    console.log("INSIDE INIT OF SELECT");
+    console.log(this.incidentSelector.selectedIncident);
+
+
+
     this.people$ = this.dataService.getPeople();
     this.dataService.getPeople().subscribe(items => (this.people = items));
-    this.simpleItems = [true, 'Two', 3];
+    this.simpleItems = [true, 'Two', 3, {id: 1, name: "Solid"}];
 
     this.companiesNames.forEach((c, i) => {
       this.companies.push({ id: i, name: c });
     });
+  }
+  onIncidentTypeChange(selectedId: number | null): void {
+    console.log('Selected Incident Type ID:', selectedId);
+    
+    // If you want to log the whole object
+    const selectedIncidentType = this.incidentTypes.find(item => item.id === selectedId);
+    console.log('Selected Incident Type:', selectedIncidentType);
+    if(this.incidentSelector.selectedIncident!=undefined){
+      this.incidentSelector.selectedIncident.incidentSubtype=selectedIncidentType;
+    }
+    
+  }
+  onTypeChange(selectedValue: any){
+
+
+    console.log(selectedValue);
+    let incidentTypeId=selectedValue.id as number;
+    
+    this.filteredIncidentSubtypes=this.incidentSubtypes.filter(subtype=>{
+
+      return subtype.incidentTypeId===incidentTypeId;
+    });
+    let selected_subtypeDOM:any=document.getElementById("subtype_select");
+
+   
+    console.log(this.filteredIncidentSubtypes);
+  }
+
+  onSubtypeChange(selectedValue : any){
+
+    console.log(selectedValue);
+    if(this.incidentSelector.selectedIncident!=undefined){
+      this.incidentSelector.selectedIncident.incidentSubtype=selectedValue;
+    }
+
+    this.checkIfFormValid();
+
+
+  }
+  
+  dateTimeInput(event: any){
+    this.incidentSelector.selectedIncident.dateOfReport = event.target.value._d;
+    this.checkIfFormValid();
+  }
+
+  checkIfFormValid(): void {
+    if(this.incidentSelector.selectedIncident.incidentSubtype != null && this.incidentSelector.selectedIncident.dateOfReport != null)
+    {
+      this.isSubmitDisabled = false;
+    }
+    else{
+      this.isSubmitDisabled = true;
+    }
+    
+  }
+
+   testMethod(){
+    console.log("CLICKED");
+   }
+
+   textChanged(event: any){
+     this.incidentDescription = event.target.value;
+     console.log(this.incidentDescription);
+    if(this.incidentSelector.selectedIncident!=undefined){
+      this.incidentSelector.selectedIncident.description=this.incidentDescription;
+      this.incidentSelector.selectedIncident.photoLink=null;
+      this.incidentSelector.selectedIncident.dateOfReport="2024-01-01";
+    }
+    
+   }
+
+   submitclick(){
+
+    console.log(this.group.get("dateTimeManual")?.value);
+    console.log(this.incidentSelector.selectedIncident);
+    this.incidentSelector.selectedIncident.approved = 0;
+    if(this.incidentSelector.selectedIncident!=undefined){
+      this.dataService.insertIncident(this.incidentSelector.selectedIncident).subscribe(result =>{
+        console.log(result);
+      });
+    }
+
+   }
+
+   onFileSelected(event: Event): void {
+    const fileInput = event.target as HTMLInputElement;
+    if (fileInput.files && fileInput.files[0]) {
+      const file = fileInput.files[0];
+
+      const reader = new FileReader();
+      reader.onload = () => {
+        // After file is loaded, assign it to the imageUrl
+        this.imageUrl = reader.result;  // This will be the data URL of the image
+        console.log('Image URL:', this.imageUrl);  // You can log it or use it further
+        if(this.incidentSelector.selectedIncident !=undefined){
+          this.incidentSelector.selectedIncident.photoLink=this.imageUrl as string;
+        }
+      
+      };
+      reader.readAsDataURL(file);  // Read the file as a data URL
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  displayCompany(company: any): string {
+    return company ? company.name : '';
   }
 
   toggleDisabled() {
@@ -96,4 +322,37 @@ export class FormsSelectComponent implements OnInit {
       autoFocus: false,
     });
   }
+  form = new FormGroup({});
+  form2 = new FormGroup({});
+  model = { email: 'email@gmail.com' };
+  model2 = {};
+  fields2: FormlyFieldConfig[] = [
+    
+    {
+      type: 'textarea',
+      key: 'otherInput',
+      templateOptions: {
+        label: 'Other Input',
+      },
+    },
+    
+  ];
+
+  submit() {
+    if (this.form.valid) {
+      this.showToast(this.model);
+    }
+  }
+
+  submit2() {
+    if (this.form2.valid) {
+      this.showToast(this.model2);
+    }
+  }
+
+  showToast(obj: any) {
+    this.toast.success(JSON.stringify(obj));
+  }
+
+  
 }
