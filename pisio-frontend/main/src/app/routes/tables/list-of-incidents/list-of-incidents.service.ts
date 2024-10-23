@@ -9,13 +9,20 @@ export interface RepoSearchList {
 }
 
 @Injectable(
-  
+  {
+    providedIn: 'root'
+  }
 )
 export class TablesRemoteDataService {
   constructor(private http: HttpClient){}
  
   getData(): Observable<any> {
     return this.http.get<any>('http://localhost:8080/incidents/approved');
+  }
+
+  getIncidentById(incidentId: number){
+
+    return this.http.get<any>(`http://localhost:8080/incidents/${incidentId}`);
   }
     
 }

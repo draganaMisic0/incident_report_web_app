@@ -1,0 +1,33 @@
+form{
+
+    height: 500px;
+    padding: 30px;
+
+}
+.date-container{
+
+
+    flex: row;
+}
+
+.date{
+
+    padding-right: 5px;
+
+}
+
+.distance{
+
+   
+    width: 68.9%; 
+}
+.buttons{
+
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px; 
+}
+.filter-button{
+
+   margin-left: 10px;
+}

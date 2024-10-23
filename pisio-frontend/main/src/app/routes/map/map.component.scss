@@ -7,7 +7,19 @@
   height: 75vh;
   width: 75%;
   border-radius: 20px;
+
+  
 }
+.incident-card{
+
+  height: 60vh;
+  width: 25%;
+  border-radius: 20px;
+  margin-left: 20px;
+  background-color: rgba(60, 58, 58, 0.173);
+  justify-content: space-between;
+}
+
 
 /* 
  * Optional: Makes the sample page fill the window. 
@@ -29,9 +41,28 @@ body {
   border-color: rgb(75, 54, 75);
   margin-right: 20px;
   font-size: medi;
+
+}
+
+.flex-container {
+  display: flex; /* Establishes flexbox */
+  justify-content: 100px; /* Aligns items with space in between */
+  align-items: row; /* Centers items vertically */
 }
 
 button:disabled{
 
 background-color: grey;
+
 }
+.table-row{
+
+  height: 50px;
+  padding-left: 10px;
+}
+table{
+
+  padding-left: 10px;
+}
+
+

@@ -1,7 +1,53 @@
 <router-outlet></router-outlet>
-
+<div class="flex-container">
 <div id="map" class="map-container"></div>
+<mat-card class="incident-card" appearance="outlined">
+
+   <table>
+    <thead>
+        <tr class="table-row">
+            <th>Category</th>
+            <th>Value</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr class="table-row">
+            <td>Incident subtype</td>
+            <td>{{incidentToDisplay?.incidentSubtype?.name}}</td>
+        </tr>
+        <tr class="table-row">
+            <td>Date of report</td>
+            <td>{{incidentToDisplay?.dateOfReport}}</td>
+        </tr>
+        <tr class="table-row">
+            <td>Description</td>
+            <td>{{incidentToDisplay?.description}}</td>
+        </tr>
+        
+    </tbody>
+   </table>
+    @if(incidentToDisplay?.id)
+    {
+        @if(incidentToDisplay?.photoLink != null){
+            <img mat-card-image class="my_image" [src]="'http://localhost:8080/incident/image/' + incidentToDisplay?.id"
+             alt="No photo found for this incident"/>
+        }
+     <!--  @else {
+            <img mat-card-image class="my_image" src="/main/src/assets/images/error/no_image.png"
+             alt="UPAO U ELSE"/>
+        }
+        --> 
+    }
+
+  </mat-card>
+</div>
 <br/>
 <button [disabled]="isButtonDisabled" (click)="handleClickAddIncident()" class="add-report" mat-flat-button>Report an incident</button>
-<button class="add-report" mat-flat-button>Filter incidents</button>
+<button class="add-report" (click)="openFilterDialog()" mat-flat-button>Filter incidents</button>
+@if(this.mapService.filterFlag==true){
+    <button class="add-report" (click)="onCancelFilter()" mat-flat-button>Disable filter</button>
+}
 
+
+
+  

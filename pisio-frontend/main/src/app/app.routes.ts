@@ -8,6 +8,7 @@ import { Error500Component } from './routes/sessions/500.component';
 import { LoginComponent } from './routes/sessions/login/login.component';
 import { RegisterComponent } from './routes/sessions/register/register.component';
 import { MapComponent } from './routes/map/map.component';
+import { MapRefreshComponent } from './routes/map/map-refresh/map-refresh.component';
 
 export const routes: Routes = [
   {
@@ -17,6 +18,7 @@ export const routes: Routes = [
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: 'dashboard', component: DashboardComponent },
+      { path: 'map-refresh', component: MapRefreshComponent },
       { path: '403', component: Error403Component },
       { path: '404', component: Error404Component },
       { path: '500', component: Error500Component },

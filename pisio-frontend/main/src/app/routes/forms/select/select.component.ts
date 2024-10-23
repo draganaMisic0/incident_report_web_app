@@ -3,7 +3,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatDialog, MatDialogActions, MatDialogClose, MatDialogContent, MatDialogModule, MatDialogTitle } from '@angular/material/dialog';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MtxSelectModule } from '@ng-matero/extensions/select';
@@ -22,6 +22,8 @@ import { DateAdapter } from '@angular/material/core';
 import { TranslateService } from '@ngx-translate/core';
 import { MatIconModule } from '@angular/material/icon';
 import { IncidentSelectionService } from 'app/services/incident-selection.service';
+import { Router } from '@angular/router';
+import { IncidentAddedDialogComponent } from '../incident-added-dialog/incident-added-dialog.component';
 
 
 
@@ -48,7 +50,11 @@ import { IncidentSelectionService } from 'app/services/incident-selection.servic
     MtxSelectModule,
     MtxDatetimepickerModule,
     PageHeaderComponent,
-    ReactiveFormsModule
+    ReactiveFormsModule, 
+    MatDialogActions, 
+    MatDialogClose,
+    MatDialogContent,
+    MatDialogTitle
   ]
 })
 export class FormsSelectComponent implements OnInit {
@@ -102,9 +108,11 @@ export class FormsSelectComponent implements OnInit {
   incidentDescription: string= "";
   imageUrl: string | ArrayBuffer | null = null;
   isSubmitDisabled=true;
+  readonly incidentAddedDialog = inject(MatDialog);
+
  
 
-  constructor(private incidentSelector: IncidentSelectionService, private fb: FormBuilder) {
+  constructor(private incidentSelector: IncidentSelectionService, private fb: FormBuilder, private router:Router) {
     this.today = moment.utc();
     this.tomorrow = moment.utc().date(moment.utc().date() + 1);
     this.min = this.today.clone().year(2018).month(10).date(3).hour(11).minute(10);
@@ -240,8 +248,7 @@ export class FormsSelectComponent implements OnInit {
      console.log(this.incidentDescription);
     if(this.incidentSelector.selectedIncident!=undefined){
       this.incidentSelector.selectedIncident.description=this.incidentDescription;
-      this.incidentSelector.selectedIncident.photoLink=null;
-      this.incidentSelector.selectedIncident.dateOfReport="2024-01-01";
+     
     }
     
    }
@@ -256,8 +263,18 @@ export class FormsSelectComponent implements OnInit {
         console.log(result);
       });
     }
+    this.isSubmitDisabled=true;
+    this.openIncidentAddedDialog();
 
    }
+
+   openIncidentAddedDialog(){
+
+    this.incidentAddedDialog.open(IncidentAddedDialogComponent);
+   }
+
+   
+   
 
    onFileSelected(event: Event): void {
     const fileInput = event.target as HTMLInputElement;
