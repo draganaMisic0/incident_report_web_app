@@ -32,8 +32,9 @@ export class AuthService {
   check() {
     return this.tokenService.valid();
   }
-
+ 
   login(username: string, password: string, rememberMe = false) {
+    
     return this.loginService.login(username, password, rememberMe).pipe(
       tap(token => this.tokenService.set(token)),
       map(() => this.check())
@@ -51,6 +52,8 @@ export class AuthService {
   }
 
   logout() {
+
+    console.log("stari log out");
     return this.loginService.logout().pipe(
       tap(() => this.tokenService.clear()),
       map(() => !this.check())

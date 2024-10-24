@@ -16,6 +16,9 @@ export class MapService {
   public approvedIncidents: Incident[]=[];
   public filteredIncidents: Incident[]=[];
   private mapOptions: google.maps.MapOptions={ }
+  
+  
+
   public selectedLatLng: google.maps.LatLng={} as any;
   private selectedLatLngSubject = new BehaviorSubject<google.maps.LatLng | null >(null);
   public selectedLatLng$ = this.selectedLatLngSubject.asObservable();

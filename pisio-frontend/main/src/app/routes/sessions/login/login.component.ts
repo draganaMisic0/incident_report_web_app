@@ -10,8 +10,10 @@ import { Router, RouterLink } from '@angular/router';
 import { MtxButtonModule } from '@ng-matero/extensions/button';
 import { TranslateModule } from '@ngx-translate/core';
 import { filter } from 'rxjs/operators';
-
-import { AuthService } from '@core/authentication';
+import { CommonModule } from '@angular/common';
+import { OAuthService, OAuthEvent } from 'angular-oauth2-oidc';
+import { AuthService, TokenService } from '@core/authentication';
+import { GoogleAuthService } from './google-auth.service';
 
 @Component({
   selector: 'app-login',
@@ -29,12 +31,15 @@ import { AuthService } from '@core/authentication';
     MatInputModule,
     MtxButtonModule,
     TranslateModule,
+    CommonModule
   ],
 })
 export class LoginComponent {
   private readonly fb = inject(FormBuilder);
   private readonly router = inject(Router);
   private readonly auth = inject(AuthService);
+  private readonly googleAuth=inject(GoogleAuthService);
+  private readonly tokenService = inject(TokenService);
 
   isSubmitting = false;
 
@@ -61,9 +66,12 @@ export class LoginComponent {
 
     this.auth
       .login(this.username.value, this.password.value, this.rememberMe.value)
-      .pipe(filter(authenticated => authenticated))
+      .pipe(filter(authenticated => {console.log(authenticated); return authenticated}))
       .subscribe({
         next: () => {
+          console.log(this.password.value);
+          console.log(this.rememberMe.value);
+          
           this.router.navigateByUrl('/');
         },
         error: (errorRes: HttpErrorResponse) => {
@@ -80,4 +88,25 @@ export class LoginComponent {
         },
       });
   }
+
+  loginWithGoogle() {
+    this.googleAuth.login().subscribe({
+      next: (token) => {
+        // Assuming the token is returned from the Google authentication
+        console.log(token);
+        //this.tokenService.set(token); // Store the token as you do in the login method
+         // You can check or process the user after logging in
+      },
+      error: (error) => {
+        console.error('Google login failed', error);
+        // Handle errors here, like showing a notification
+      }
+    });
+  }
+
+  check() {
+    // Implement your logic here. For example, check if the user is authenticated.
+   
+  }
+  
 }

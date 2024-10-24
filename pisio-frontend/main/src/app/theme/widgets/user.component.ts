@@ -7,6 +7,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { debounceTime, tap } from 'rxjs';
 
 import { AuthService, SettingsService, User } from '@core';
+import { GoogleAuthService } from 'app/routes/sessions/login/google-auth.service';
 
 @Component({
   selector: 'app-user',
@@ -49,6 +50,7 @@ export class UserComponent implements OnInit {
   private readonly auth = inject(AuthService);
   private readonly router = inject(Router);
   private readonly settings = inject(SettingsService);
+  private readonly authGoogle = inject(GoogleAuthService);
 
   user!: User;
 
@@ -69,7 +71,7 @@ export class UserComponent implements OnInit {
   }
 
   restore() {
-    this.settings.reset();
-    window.location.reload();
+    console.log(this.authGoogle.getProfile());
+    //window.location.reload();
   }
 }

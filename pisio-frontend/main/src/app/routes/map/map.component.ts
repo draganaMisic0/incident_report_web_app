@@ -1,5 +1,6 @@
 import { AfterViewInit, ChangeDetectorRef, Component, inject, model, OnDestroy, OnInit, signal } from '@angular/core';
-import { GoogleMapsModule } from '@angular/google-maps';
+
+
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { IncidentSelectionService } from 'app/services/incident-selection.service';
 import { MapService } from './map.service';
@@ -22,6 +23,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { FilterDialogComponent } from './filter-dialog/filter-dialog.component';
+import { AppComponent } from 'app/app.component';
+import { GoogleMapsModule } from '@angular/google-maps';
 export interface DialogData {
   animal: string;
   name: string;
@@ -30,12 +33,22 @@ export interface DialogData {
 @Component({
   selector: 'app-map',
   standalone: true,
-  imports: [GoogleMapsModule, RouterOutlet,MatCardModule, MatButtonModule,MatTableModule, CurrencyPipe, 
-    MatFormFieldModule, MatInputModule, FormsModule, MatButtonModule],
+  imports: [
+   
+    GoogleMapsModule,
+    RouterOutlet,
+    MatCardModule,
+    MatButtonModule,
+    MatTableModule,
+    CurrencyPipe,
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule
+  ],
   templateUrl: './map.component.html',
-  styleUrl: './map.component.scss',
- 
+  styleUrls: ['./map.component.scss'] // Corrected to "styleUrls"
 })
+
 
 
 export class MapComponent implements OnInit, AfterViewInit, OnDestroy{
@@ -159,5 +172,3 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy{
  
 
  
-
-

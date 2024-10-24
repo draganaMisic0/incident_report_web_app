@@ -223,10 +223,26 @@ export class FormsSelectComponent implements OnInit {
 
   }
   
-  dateTimeInput(event: any){
-    this.incidentSelector.selectedIncident.dateOfReport = event.target.value._d;
+  dateTimeInput(event: any) {
+    // Get the value from the datetime input (expected to be a string)
+    const dateTimeString = event.target.value; // e.g., '2024-10-22T17:25'
+
+    // Create a local date object from the string
+    const localDate = new Date(dateTimeString); // Local date and time
+
+    // Convert to UTC
+    const utcDate = new Date(localDate.getTime() - (localDate.getTimezoneOffset() * 60000));
+
+    // Store the UTC date in the selectedIncident's dateOfReport
+    this.incidentSelector.selectedIncident.dateOfReport = utcDate.toISOString();;
+
+    // Log the stored time for debugging
+    console.log("Stored date and time (UTC):", utcDate);
+
+    // Validate the form
     this.checkIfFormValid();
-  }
+}
+
 
   checkIfFormValid(): void {
     if(this.incidentSelector.selectedIncident.incidentSubtype != null && this.incidentSelector.selectedIncident.dateOfReport != null)

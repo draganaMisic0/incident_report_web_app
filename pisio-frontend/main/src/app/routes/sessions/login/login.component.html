@@ -6,45 +6,34 @@
 
     <mat-card-content>
       <form class="form-field-full" [formGroup]="loginForm">
+        <!-- Existing form fields for username and password -->
+
         <mat-form-field appearance="outline">
-          <mat-label>{{'username' | translate}}: ng-matero</mat-label>
+          <mat-label>{{'username' | translate}}</mat-label>
           <input matInput placeholder="ng-matero" formControlName="username" required>
-          @if (username.invalid) {
-            <mat-error>
-              @if (username.errors?.required) {
-                <span>{{'please_enter' | translate}}
-                  <strong>ng-matero</strong>
-                </span>
-              }
-              @if (username.errors?.remote) {
-                <span>{{ username.errors?.remote }}</span>
-              }
-            </mat-error>
-          }
+          <mat-error *ngIf="username.invalid">
+            <span *ngIf="username.errors?.required">{{'please_enter' | translate}} <strong>ng-matero</strong></span>
+            <span *ngIf="username.errors?.remote">{{ username.errors?.remote }}</span>
+          </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label>{{'password' | translate}}: ng-matero</mat-label>
-          <input matInput placeholder="ng-matero" type="password"
-            formControlName="password" required>
-          @if (password.invalid) {
-            <mat-error>
-              @if (password.errors?.required) {
-                <span>{{'please_enter' | translate}}
-                  <strong>ng-matero</strong>
-                </span>
-              }
-              @if (password.errors?.remote) {
-                <span>{{ password.errors?.remote }}</span>
-              }
-            </mat-error>
-          }
+          <mat-label>{{'password' | translate}}</mat-label>
+          <input matInput placeholder="ng-matero" type="password" formControlName="password" required>
+          <mat-error *ngIf="password.invalid">
+            <span *ngIf="password.errors?.required">{{'please_enter' | translate}} <strong>ng-matero</strong></span>
+            <span *ngIf="password.errors?.remote">{{ password.errors?.remote }}</span>
+          </mat-error>
         </mat-form-field>
 
         <mat-checkbox formControlName="rememberMe">{{'remember_me' | translate}}</mat-checkbox>
 
         <button class="w-full m-y-16" mat-flat-button [disabled]="!!loginForm.invalid"
           [loading]="isSubmitting" (click)="login()">{{'login' | translate}}</button>
+
+        <!-- New button for Google login -->
+        <button class="w-full m-y-16" mat-flat-button color="primary"
+          (click)="loginWithGoogle()">{{'login_with_google' | translate}}</button>
 
         <div>
           <span>{{'have_no_account' | translate}}? </span>
