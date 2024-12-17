@@ -133,7 +133,7 @@
 
       
         <div class="d-flex justify-content-center m-t-8">
-          <button mat-button class="m-x-8" type="button">Cancel</button>
+          <button mat-button class="m-x-8" type="button" (click)="cancelClick()">Cancel</button>
           <button [disabled]="isSubmitDisabled" mat-flat-button (click)="submitclick()">Submit</button>
         </div>
         

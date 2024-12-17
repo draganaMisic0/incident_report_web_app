@@ -86,7 +86,6 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy{
    this.subscription = this.mapService.selectedLatLng$.subscribe(latLng => {
     if (latLng) {
       this.lat = latLng.lat();
-      console.log("ispisujem lat "+this.lat);
       this.lng = latLng.lng();
       this.isButtonDisabled = false;
       
@@ -101,7 +100,6 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy{
   });
   this.changeSubscription = this.mapService.markerUpdatedObservable$.subscribe(result => {
     if(result == true){
-      console.log("Change happened");
       this.cdr.detectChanges();
     }
   })
@@ -115,12 +113,12 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy{
   
  private initMap = async () => {
   const { Map } = await google.maps.importLibrary("maps") as google.maps.MapsLibrary;
- 
+  const {spherical}  = await google.maps.importLibrary("geometry") as google.maps.GeometryLibrary;
+
     this.mapService.initialize(new google.maps.LatLng(44.77066596225198, 17.19084910773), document.getElementById("map") as HTMLElement);
     this.mapService.incidentToDisplay$.subscribe(incident=>{
 
       this.incidentToDisplay=incident as Incident;
-      console.log(this.incidentToDisplay);
       this.cdr.detectChanges();
     })
   

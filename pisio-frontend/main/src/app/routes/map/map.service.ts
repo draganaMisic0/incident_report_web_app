@@ -56,8 +56,7 @@ export class MapService {
     if(!this.filterFlag){
 
       this.remoteSrv.getData().subscribe((result: any) =>{
-        console.log('result');
-        console.log(result);
+
           let tempResults=result;
           this.approvedIncidents=result;
           this.loadMarkers(tempResults);
@@ -104,7 +103,6 @@ export class MapService {
   
 
   markerClicked(incident: Incident) {
-    console.log(incident);
     this.incidentToDisplaySubject.next(incident);
    
   }
@@ -123,7 +121,6 @@ export class MapService {
     
      this.selectedLatLng=event.latLng;
      this.selectedLatLngSubject.next(this.selectedLatLng);
-      console.log(this.selectedLatLng?.toJSON());
       
     
       if (this.marker) {

@@ -4,12 +4,60 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0e4da018-0e8d-4709-86ae-10106436f044" name="Changes" comment="" />
+    <list default="true" id="0e4da018-0e8d-4709-86ae-10106436f044" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/incident_report/src/main/java/com/example/pisio/incident_report/controllers/IncidentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/incident_report/src/main/java/com/example/pisio/incident_report/controllers/IncidentController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/incident_report/src/main/java/com/example/pisio/incident_report/models/IncidentRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/incident_report/src/main/java/com/example/pisio/incident_report/models/IncidentRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/incident_report/src/main/java/com/example/pisio/incident_report/models/entities/IncidentEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/incident_report/src/main/java/com/example/pisio/incident_report/models/entities/IncidentEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pisio-frontend/main/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../pisio-frontend/main/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pisio-frontend/main/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../pisio-frontend/main/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pisio-frontend/main/public/data/menu.json" beforeDir="false" afterPath="$PROJECT_DIR$/../pisio-frontend/main/public/data/menu.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pisio-frontend/main/public/i18n/en-US.json" beforeDir="false" afterPath="$PROJECT_DIR$/../pisio-frontend/main/public/i18n/en-US.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pisio-frontend/main/schematics/ng-add/files/common-files/src/app/fake-login.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../pisio-frontend/main/schematics/ng-add/files/common-files/src/app/fake-login.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pisio-frontend/main/src/app/core/authentication/auth.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../pisio-frontend/main/src/app/core/authentication/auth.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pisio-frontend/main/src/app/core/authentication/login.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../pisio-frontend/main/src/app/core/authentication/login.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pisio-frontend/main/src/app/core/authentication/user.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../pisio-frontend/main/src/app/core/authentication/user.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pisio-frontend/main/src/app/layouts/full/sidebar/sidebar.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../pisio-frontend/main/src/app/layouts/full/sidebar/sidebar.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pisio-frontend/main/src/app/pages/pages.routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../pisio-frontend/main/src/app/pages/pages.routes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pisio-frontend/main/src/app/routes/forms/data.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../pisio-frontend/main/src/app/routes/forms/data.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pisio-frontend/main/src/app/routes/forms/select/select.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../pisio-frontend/main/src/app/routes/forms/select/select.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pisio-frontend/main/src/app/routes/map/filter-dialog/filter-dialog.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../pisio-frontend/main/src/app/routes/map/filter-dialog/filter-dialog.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pisio-frontend/main/src/app/routes/map/filter-dialog/filter-dialog.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../pisio-frontend/main/src/app/routes/map/filter-dialog/filter-dialog.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pisio-frontend/main/src/app/routes/map/map.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../pisio-frontend/main/src/app/routes/map/map.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pisio-frontend/main/src/app/routes/map/map.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../pisio-frontend/main/src/app/routes/map/map.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pisio-frontend/main/src/app/routes/sessions/login/google-auth.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../pisio-frontend/main/src/app/routes/sessions/login/google-auth.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pisio-frontend/main/src/app/routes/sessions/login/login.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../pisio-frontend/main/src/app/routes/sessions/login/login.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pisio-frontend/main/src/app/routes/sessions/login/login.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../pisio-frontend/main/src/app/routes/sessions/login/login.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pisio-frontend/main/src/app/routes/tables/kitchen-sink/pending-incidents.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../pisio-frontend/main/src/app/routes/tables/kitchen-sink/pending-incidents.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pisio-frontend/main/src/app/routes/tables/list-of-incidents/list-of-incidents.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../pisio-frontend/main/src/app/routes/tables/list-of-incidents/list-of-incidents.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pisio-frontend/main/src/app/shared/in-mem/in-mem-data.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../pisio-frontend/main/src/app/shared/in-mem/in-mem-data.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pisio-frontend/main/src/app/theme/header/header.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../pisio-frontend/main/src/app/theme/header/header.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pisio-frontend/main/src/app/theme/sidebar/user-panel.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../pisio-frontend/main/src/app/theme/sidebar/user-panel.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pisio-frontend/main/src/app/theme/sidemenu/sidemenu.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../pisio-frontend/main/src/app/theme/sidemenu/sidemenu.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pisio-frontend/main/src/app/theme/sidemenu/sidemenu.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../pisio-frontend/main/src/app/theme/sidemenu/sidemenu.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pisio-frontend/main/src/app/theme/widgets/user.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../pisio-frontend/main/src/app/theme/widgets/user.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pisio-frontend/main/tsconfig.app.json" beforeDir="false" afterPath="$PROJECT_DIR$/../pisio-frontend/main/tsconfig.app.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pisio-frontend/main/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../pisio-frontend/main/yarn.lock" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "draganaMisic0"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/draganaMisic0/incident_report_web_app.git",
+    "accountId": "c3a2a82a-e3be-4bc3-978e-8868693e3eb6"
+  }
+}]]></component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
@@ -17,10 +65,10 @@
       </MavenGeneralSettings>
     </option>
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 5
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 5
+}</component>
   <component name="ProjectId" id="2n72pMQMdMMgGYs9GsQm92vXGe1" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -29,6 +77,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/WIN11/Desktop/PISIO_project/pisio-backend/incident_report",
     "nodejs_package_manager_path": "npm",
@@ -52,6 +101,7 @@
       <option name="presentableId" value="Default" />
       <updated>1728309977401</updated>
       <workItem from="1728309979398" duration="27000" />
+      <workItem from="1734431794537" duration="30000" />
     </task>
     <servers />
   </component>

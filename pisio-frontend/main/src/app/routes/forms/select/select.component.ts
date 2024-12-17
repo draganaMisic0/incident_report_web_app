@@ -24,6 +24,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { IncidentSelectionService } from 'app/services/incident-selection.service';
 import { Router } from '@angular/router';
 import { IncidentAddedDialogComponent } from '../incident-added-dialog/incident-added-dialog.component';
+import { AuthGoogleService } from 'app/auth-google.service';
 
 
 
@@ -69,10 +70,7 @@ export class FormsSelectComponent implements OnInit {
   private readonly translate = inject(TranslateService);
 
   // Data source
-  people$!: Observable<Person[]>;
-  people: Person[] = [];
-  selectedPersonId = '5a15b13c36e7a7f00cf0d7cb';
-  selectedPersonId2 = '5a15b13c36e7a7f00cf0d7cb';
+ 
   group: FormGroup;
   tomorrow: moment.Moment;
   today: moment.Moment;
@@ -97,10 +95,7 @@ export class FormsSelectComponent implements OnInit {
   // Tags
   companies: any[] = [];
   loading = false;
-  companiesNames = ['Miškas', 'Žalias', 'Flexigen'];
-  selectedCompany = null;
-  selectedCompanyCustom = null;
-  selectedCompanyCustomPromise = null;
+
   incidentTypes : any[]=[];
   selectedIncidentType: number | null=null;
   incidentSubtypes : any[]=[];
@@ -112,7 +107,8 @@ export class FormsSelectComponent implements OnInit {
 
  
 
-  constructor(private incidentSelector: IncidentSelectionService, private fb: FormBuilder, private router:Router) {
+  constructor(private incidentSelector: IncidentSelectionService, private authGoogle: AuthGoogleService,
+    private fb: FormBuilder, private router:Router) {
     this.today = moment.utc();
     this.tomorrow = moment.utc().date(moment.utc().date() + 1);
     this.min = this.today.clone().year(2018).month(10).date(3).hour(11).minute(10);
@@ -157,6 +153,10 @@ export class FormsSelectComponent implements OnInit {
   }
   ngOnInit() {
 
+    if(this.incidentSelector.selectedIncident.longitude == undefined || this.incidentSelector.selectedIncident.latitude == undefined){
+      alert('First click on the map to report an incident.');
+      this.router.navigate(['/map']);
+    }
 
    
     this.dataService.getIncidentTypes().subscribe((result: any[]) => {
@@ -171,25 +171,19 @@ export class FormsSelectComponent implements OnInit {
 
     })
 
-    console.log("INSIDE INIT OF SELECT");
-    console.log(this.incidentSelector.selectedIncident);
 
 
 
-    this.people$ = this.dataService.getPeople();
-    this.dataService.getPeople().subscribe(items => (this.people = items));
+
+
+
     this.simpleItems = [true, 'Two', 3, {id: 1, name: "Solid"}];
 
-    this.companiesNames.forEach((c, i) => {
-      this.companies.push({ id: i, name: c });
-    });
+    
   }
   onIncidentTypeChange(selectedId: number | null): void {
-    console.log('Selected Incident Type ID:', selectedId);
-    
     // If you want to log the whole object
     const selectedIncidentType = this.incidentTypes.find(item => item.id === selectedId);
-    console.log('Selected Incident Type:', selectedIncidentType);
     if(this.incidentSelector.selectedIncident!=undefined){
       this.incidentSelector.selectedIncident.incidentSubtype=selectedIncidentType;
     }
@@ -197,8 +191,6 @@ export class FormsSelectComponent implements OnInit {
   }
   onTypeChange(selectedValue: any){
 
-
-    console.log(selectedValue);
     let incidentTypeId=selectedValue.id as number;
     
     this.filteredIncidentSubtypes=this.incidentSubtypes.filter(subtype=>{
@@ -206,9 +198,6 @@ export class FormsSelectComponent implements OnInit {
       return subtype.incidentTypeId===incidentTypeId;
     });
     let selected_subtypeDOM:any=document.getElementById("subtype_select");
-
-   
-    console.log(this.filteredIncidentSubtypes);
   }
 
   onSubtypeChange(selectedValue : any){
@@ -261,14 +250,16 @@ export class FormsSelectComponent implements OnInit {
 
    textChanged(event: any){
      this.incidentDescription = event.target.value;
-     console.log(this.incidentDescription);
     if(this.incidentSelector.selectedIncident!=undefined){
       this.incidentSelector.selectedIncident.description=this.incidentDescription;
      
     }
     
    }
+   cancelClick(){
 
+    this.router.navigate(['/dashboard']);
+   }
    submitclick(){
 
     console.log(this.group.get("dateTimeManual")?.value);
@@ -280,11 +271,11 @@ export class FormsSelectComponent implements OnInit {
       });
     }
     this.isSubmitDisabled=true;
-    this.openIncidentAddedDialog();
+    this.afterButtonPress();
 
    }
 
-   openIncidentAddedDialog(){
+   afterButtonPress(){
 
     this.incidentAddedDialog.open(IncidentAddedDialogComponent);
    }
@@ -310,7 +301,7 @@ export class FormsSelectComponent implements OnInit {
       reader.readAsDataURL(file);  // Read the file as a data URL
     }
   }
-
+   
 
 
 

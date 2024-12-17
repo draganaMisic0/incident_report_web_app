@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -25,7 +26,7 @@ public class IncidentEntity implements BaseEntity<Integer> {
     private String photoLink;
 
     @Column(name = "date_of_report", nullable = false)
-    private LocalDate dateOfReport;
+    private LocalDateTime dateOfReport;
 
 
 

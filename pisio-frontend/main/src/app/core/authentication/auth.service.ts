@@ -53,7 +53,6 @@ export class AuthService {
 
   logout() {
 
-    console.log("stari log out");
     return this.loginService.logout().pipe(
       tap(() => this.tokenService.clear()),
       map(() => !this.check())

@@ -56,7 +56,7 @@ export class FilterDialogComponent implements OnInit {
   typeControl=new FormControl('',[]);
   subtypeControl=new FormControl('', []);
   datetimeControl=new FormControl('', []);
-  distanceControl=new FormControl('', []);
+  distanceControl: FormControl<number | null>=new FormControl(null, []);
   
 
 
@@ -74,8 +74,7 @@ export class FilterDialogComponent implements OnInit {
     this.dataService.getIncidentSubtypes().subscribe({
       next: (result: any[]) => {
         this.incidentSubtypes = result;
-        console.log("Subtypes");
-        console.log(result);
+
       },
       error: (error) => {
         console.error('Error fetching incident subtypes:', error);
@@ -101,14 +100,10 @@ export class FilterDialogComponent implements OnInit {
       this.selectedIncident.incidentType=selectedValue;
     }
     
-   
-    console.log(this.filteredIncidentSubtypes);
   }
 
   formatLabel(value: number): string {
-    if (value >= 1000) {
-      return Math.round(value/1000) + 'km';
-    }
+
 
     return `${value}`;
   }
@@ -140,7 +135,6 @@ export class FilterDialogComponent implements OnInit {
       filteredIncidents=filteredIncidents.filter(incident=>{
         return incident.incidentSubtype.id==selectedIncidentSubtype.id;
       })
-      console.log(filteredIncidents);
     }
     if(selectedDate){
 
@@ -149,9 +143,20 @@ export class FilterDialogComponent implements OnInit {
       })
     }
     if(selectedDistance){
-
       
-    
+     
+      const selectedOnMap = this.mapService.selectedLatLng;
+      
+      filteredIncidents=filteredIncidents.filter((incident : any) => {
+        
+        const incidentCoords = new google.maps.LatLng({lat: incident.location.latitude, lng: incident.location.longitude});
+
+        const distanceToIncident = google.maps.geometry.spherical.computeDistanceBetween(selectedOnMap, incidentCoords);
+        
+  
+
+        return distanceToIncident <= selectedDistance;
+      });
     } 
 
     

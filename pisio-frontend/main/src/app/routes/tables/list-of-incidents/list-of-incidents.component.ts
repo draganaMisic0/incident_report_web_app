@@ -13,6 +13,8 @@ import { finalize } from 'rxjs';
 import { PageHeaderComponent } from '@shared';
 import { TablesRemoteDataService } from './list-of-incidents.service';
 import { TablesDataService } from '../data.service';
+import { GoogleAuthService } from 'app/routes/sessions/login/google-auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tables-remote-data',
@@ -34,6 +36,10 @@ import { TablesDataService } from '../data.service';
 export class TablesPendingIncidentsComponent implements OnInit {
   private readonly remoteSrv = inject(TablesRemoteDataService);
  //private readonly dataSrv = inject(TablesDataService);
+
+ constructor(private authGoogle: GoogleAuthService, private router: Router) {
+  
+ }
   
 
 
@@ -103,6 +109,11 @@ export class TablesPendingIncidentsComponent implements OnInit {
   }
 
   ngOnInit() {
+    if(!this.authGoogle.loggedIn()){
+      alert('User MUST be logged in to access.');
+      this.router.navigate(['/dashboard']);
+    }
+
     this.getList(); // Fetch data when the component initializes
   }
   

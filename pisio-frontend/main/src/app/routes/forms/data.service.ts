@@ -48,7 +48,7 @@ export class DataService {
   
   insertIncident(incidentRequest: IncidentRequest): Observable<Incident>{
 
-    console.log('Incident data to be sent:', JSON.stringify(incidentRequest, null, 2));
+  
     return this.http.post<Incident>(`${this.url_incidents}`, incidentRequest);
   }
   

@@ -19,6 +19,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Base64;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -107,7 +108,7 @@ public class IncidentController {
             incidentRequest.setPhotoLink(tempIncident.getPhotoLink());
         }
         if(incidentRequest.getDateOfReport()==null){
-            incidentRequest.setDateOfReport(LocalDate.parse(tempIncident.getDateOfReport()));
+            incidentRequest.setDateOfReport(LocalDateTime.parse(tempIncident.getDateOfReport()));
         }
         if(incidentRequest.getApproved()==null){
             incidentRequest.setApproved(tempIncident.getApproved());

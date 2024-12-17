@@ -1,7 +1,8 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { of } from 'rxjs';
-import { admin, LoginService, Menu } from '@core';
+import { admin, guest, LoginService, Menu } from '@core';
 import { map } from 'rxjs/operators';
+import { AuthGoogleService } from 'app/auth-google.service';
 
 /**
  * You should delete this file in the real APP.
@@ -9,6 +10,7 @@ import { map } from 'rxjs/operators';
 @Injectable()
 export class FakeLoginService extends LoginService {
   private token = { access_token: 'MW56YjMyOUAxNjMuY29tWm9uZ2Jpbg==', token_type: 'bearer' };
+  private authGoogleService = inject(AuthGoogleService);
 
   login() {
     return of(this.token);
@@ -23,7 +25,20 @@ export class FakeLoginService extends LoginService {
   }
 
   me() {
-    return of(admin);
+    let profile = admin;
+    if(this.authGoogleService.isLoggedIn())
+    {
+      let googleProfile = this.authGoogleService.getProfile();
+      profile.avatar = googleProfile.picture;
+      profile.email = googleProfile.email;
+      profile.name = googleProfile.name;
+    }
+    else{
+      profile.name = "ANONIMNA DRAGANA"
+      profile.email = 'anonymous@gmail'
+    }
+
+    return of(profile);
   }
 
   menu() {

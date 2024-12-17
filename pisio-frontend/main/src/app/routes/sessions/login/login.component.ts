@@ -40,12 +40,13 @@ export class LoginComponent {
   private readonly auth = inject(AuthService);
   private readonly googleAuth=inject(GoogleAuthService);
   private readonly tokenService = inject(TokenService);
-
+  private providedUsername: string='ng-matero';
+  private providedPassword: string='ng-matero';
   isSubmitting = false;
 
   loginForm = this.fb.nonNullable.group({
-    username: ['ng-matero', [Validators.required]],
-    password: ['ng-matero', [Validators.required]],
+    username: ['ng-matero', []],
+    password: ['ng-matero', []],
     rememberMe: [false],
   });
 
@@ -61,17 +62,17 @@ export class LoginComponent {
     return this.loginForm.get('rememberMe')!;
   }
 
-  login() {
+  loginAsGuest() {
     this.isSubmitting = true;
 
+    const username = 'guest'
+    const password = 'guest'
+
     this.auth
-      .login(this.username.value, this.password.value, this.rememberMe.value)
-      .pipe(filter(authenticated => {console.log(authenticated); return authenticated}))
+      .login(username, password, this.rememberMe.value)
+      .pipe(filter(authenticated => authenticated))
       .subscribe({
         next: () => {
-          console.log(this.password.value);
-          console.log(this.rememberMe.value);
-          
           this.router.navigateByUrl('/');
         },
         error: (errorRes: HttpErrorResponse) => {
@@ -87,26 +88,46 @@ export class LoginComponent {
           this.isSubmitting = false;
         },
       });
+
+      
   }
 
   loginWithGoogle() {
-    this.googleAuth.login().subscribe({
-      next: (token) => {
-        // Assuming the token is returned from the Google authentication
-        console.log(token);
-        //this.tokenService.set(token); // Store the token as you do in the login method
-         // You can check or process the user after logging in
+    
+    this.googleAuth.login();
+    this.router.navigate(['/auth/login']);
+    this.auth
+    .login(this.providedUsername, this.providedPassword, this.rememberMe.value)
+    .pipe(filter(authenticated =>  authenticated))
+    .subscribe({
+      next: () => {
+       
       },
-      error: (error) => {
-        console.error('Google login failed', error);
-        // Handle errors here, like showing a notification
-      }
+      error: (errorRes: HttpErrorResponse) => {
+        if (errorRes.status === 422) {
+          const form = this.loginForm;
+          const errors = errorRes.error.errors;
+          Object.keys(errors).forEach(key => {
+            form.get(key === 'email' ? 'username' : key)?.setErrors({
+              remote: errors[key][0],
+            });
+          });
+        }
+        this.isSubmitting = false;
+      },
     });
   }
 
   check() {
     // Implement your logic here. For example, check if the user is authenticated.
    
+  }
+  isLoggedIn(){
+
+    if(this.googleAuth.getProfile!=null)
+      return true;
+    else
+      return false;
   }
   
 }

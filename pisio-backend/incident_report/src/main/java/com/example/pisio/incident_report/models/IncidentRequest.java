@@ -8,6 +8,8 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 @Data
 @Setter
 public class IncidentRequest {
@@ -15,7 +17,7 @@ public class IncidentRequest {
 
     private String description;
     private String photoLink;
-    private LocalDate dateOfReport;
+    private LocalDateTime dateOfReport;
     //private LocalDate dateOfApproval;
     private Boolean approved;
 

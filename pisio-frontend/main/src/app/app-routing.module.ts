@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BlankComponent } from './layouts/blank/blank.component';
 import { FullComponent } from './layouts/full/full.component';
+import { MagicRefreshComponent } from './routes/tables/kitchen-sink/magic-refresh.component';
 
 const routes: Routes = [
   {
@@ -13,6 +14,7 @@ const routes: Routes = [
         redirectTo: '/dashboard',
         pathMatch: 'full',
       },
+     
       {
         path: 'dashboard',
         loadChildren: () =>

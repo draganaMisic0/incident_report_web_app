@@ -4,12 +4,14 @@ import { map } from 'rxjs';
 
 import { Menu } from '@core';
 import { Token, User } from './interface';
+import { GoogleAuthService } from 'app/routes/sessions/login/google-auth.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LoginService {
   protected readonly http = inject(HttpClient);
+  protected readonly authGoogle = inject(GoogleAuthService);
 
   login(username: string, password: string, rememberMe = false) {
     return this.http.post<Token>('/auth/login', { username, password, rememberMe });
@@ -20,6 +22,7 @@ export class LoginService {
   }
 
   logout() {
+    this.authGoogle.logout();
     return this.http.post<any>('/auth/logout', {});
   }
 

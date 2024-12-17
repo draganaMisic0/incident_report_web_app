@@ -43,8 +43,8 @@
 </div>
 <br/>
 <button [disabled]="isButtonDisabled" (click)="handleClickAddIncident()" class="add-report" mat-flat-button>Report an incident</button>
-<button class="add-report" (click)="openFilterDialog()" mat-flat-button>Filter incidents</button>
-@if(this.mapService.filterFlag==true){
+<button [disabled]="isButtonDisabled" class="add-report" (click)="openFilterDialog()" mat-flat-button>Filter incidents</button>
+@if(this.mapService.filterFlag===true){
     <button class="add-report" (click)="onCancelFilter()" mat-flat-button>Disable filter</button>
 }
 

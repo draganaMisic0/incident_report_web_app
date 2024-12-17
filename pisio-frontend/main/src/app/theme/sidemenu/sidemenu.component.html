@@ -7,12 +7,13 @@
   <ul navAccordion class="matero-sidemenu level-{{level}}" [class.submenu]="level>0"
     [@expansion]="expanded ? 'expanded' : 'collapsed'">
     @for (menuItem of menuList; track menuItem) {
+      
       <ng-template
         [ngxPermissionsOnly]="menuItem.permissions?.only"
         [ngxPermissionsExcept]="menuItem.permissions?.except">
         <li #navItem="navAccordionItem" navAccordionItem class="menu-item"
           routerLinkActive="active" [route]="menuItem.route" [type]="menuItem.type">
-          @if (menuItem.type==='link') {
+          @if (menuItem.type==='link') {            
             <a class="menu-heading"
               [routerLink]="buildRoute(parentRoute.concat([menuItem.route]))"
               matRipple [matRippleDisabled]="!ripple">
@@ -56,9 +57,11 @@
           }
         </li>
       </ng-template>
+
     }
   </ul>
 </ng-template>
+
 
 <ng-template #linkTypeTpl let-item="item" let-level="level">
   @if (item.icon) {

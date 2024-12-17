@@ -51,9 +51,9 @@
              </mat-form-field>
             </div>
              <div class="distance">
-            <label>Choose distance in km</label>
+            <label>Choose distance in m</label>
             <br>
-             <mat-slider class="distance" min="1" max="500" step="10" showTickMarks discrete [displayWith]="formatLabel">
+             <mat-slider class="distance" min="1" max="5000" step="10" showTickMarks discrete [displayWith]="formatLabel">
                 <input matSliderThumb [formControl]="distanceControl">
               </mat-slider>
             </div>

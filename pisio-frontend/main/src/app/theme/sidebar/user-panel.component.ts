@@ -5,6 +5,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterLink } from '@angular/router';
 import { AuthService, User } from '@core/authentication';
 import { TranslateModule } from '@ngx-translate/core';
+import { GoogleAuthService } from 'app/routes/sessions/login/google-auth.service';
 
 @Component({
   selector: 'app-user-panel',
@@ -24,10 +25,21 @@ import { TranslateModule } from '@ngx-translate/core';
 })
 export class UserPanelComponent implements OnInit {
   private readonly auth = inject(AuthService);
+  private readonly googleAuth=inject(GoogleAuthService);
 
   user!: User;
 
   ngOnInit(): void {
-    this.auth.user().subscribe(user => (this.user = user));
-  }
+    this.auth.user().subscribe(user =>{ 
+      this.user = user;
+      if(this.googleAuth.loggedIn()){
+
+        let profile=this.googleAuth.getProfile();
+        this.user.avatar="/images/moderator-avatar.png"
+        this.user.email=profile.email;
+        this.user.name=profile.name;
+      }
+     return this.user;
+  });
+}
 }

@@ -305,6 +305,14 @@
   dependencies:
     tslib "^2.3.0"
 
+"@angular/google-maps@^18.2.9":
+  version "18.2.9"
+  resolved "https://registry.npmjs.org/@angular/google-maps/-/google-maps-18.2.9.tgz"
+  integrity sha512-+NBLd5hjhqAKxu+sTf+FU3NtumOil6GYCG3nwvFUNo7xttyLFW6lxag8jVh0cyq1yH17x2vHuv2y0j8nsV4esQ==
+  dependencies:
+    "@types/google.maps" "^3.54.10"
+    tslib "^2.3.0"
+
 "@angular/material-moment-adapter@^18.2.2":
   version "18.2.7"
   resolved "https://registry.npmjs.org/@angular/material-moment-adapter/-/material-moment-adapter-18.2.7.tgz"
@@ -2151,6 +2159,11 @@
     "@types/qs" "*"
     "@types/serve-static" "*"
 
+"@types/google.maps@^3.54.10", "@types/google.maps@^3.58.1":
+  version "3.58.1"
+  resolved "https://registry.npmjs.org/@types/google.maps/-/google.maps-3.58.1.tgz"
+  integrity sha512-X9QTSvGJ0nCfMzYOnaVs/k6/4L+7F5uCS+4iUmkLEls6J9S/Phv+m/i3mDeyc49ZBgwab3EFO1HEoBY7k98EGQ==
+
 "@types/http-errors@*":
   version "2.0.4"
   resolved "https://registry.npmjs.org/@types/http-errors/-/http-errors-2.0.4.tgz"
@@ -2670,6 +2683,13 @@ angular-in-memory-web-api@~0.18.0:
   integrity sha512-Eqkr9+x3d7K4dmn6Qs3ZVAfqBDPZN0N7Qel5i8eU/pe5r44J/pfxlNW+1LC2Sb2PdENEdvFzC8wx8qly5+kQyQ==
   dependencies:
     tslib "^2.3.0"
+
+angular-oauth2-oidc@^17.0.2:
+  version "17.0.2"
+  resolved "https://registry.npmjs.org/angular-oauth2-oidc/-/angular-oauth2-oidc-17.0.2.tgz"
+  integrity sha512-zYgeLmAnu1g8XAYZK+csAsCQBDhgp9ffBv/eArEnujGxNPTeK00bREHWObtehflpQdSn+k9rY2D15ChCSydyVw==
+  dependencies:
+    tslib "^2.5.2"
 
 ansi-colors@4.1.3:
   version "4.1.3"
@@ -9005,7 +9025,7 @@ ts-api-utils@^1.3.0:
   resolved "https://registry.npmjs.org/ts-api-utils/-/ts-api-utils-1.3.0.tgz"
   integrity sha512-UQMIo7pb8WRomKR1/+MFVLTroIvDVtMX3K6OUir8ynLyzB8Jeriont2bTAtmNPa1ekAgN7YPDyf6V+ygrdU+eQ==
 
-tslib@^2.0.0, tslib@^2.1.0, tslib@^2.3.0, tslib@^2.3.1, tslib@^2.4.0, tslib@^2.6.0:
+tslib@^2.0.0, tslib@^2.1.0, tslib@^2.3.0, tslib@^2.3.1, tslib@^2.4.0, tslib@^2.5.2, tslib@^2.6.0:
   version "2.7.0"
   resolved "https://registry.npmjs.org/tslib/-/tslib-2.7.0.tgz"
   integrity sha512-gLXCKdN1/j47AiHiOkJN69hJmcbGTHI0ImLmbYLHykhgeN0jVGola9yVjFgzCUklsZQMW55o+dW7IXv3RCXDzA==

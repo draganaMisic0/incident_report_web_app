@@ -35,20 +35,11 @@ export class GoogleAuthService {
   }
  
 
-  login(): Observable<boolean> {
-    return new Observable((observer) => {
-      this.oAuthService.initImplicitFlow();
-
-      this.oAuthService.events.subscribe((event) => {
-        // Use a type guard or check if the event type is a known type
-        if (event.type === 'token_received') {
-          observer.next(true);
-          observer.complete();
-        } else if (this.isErrorEvent(event)) {
-          observer.error(event); // Emit the error event
-        }
-      });
-    });
+  login(){
+   
+    this.oAuthService.initCodeFlow();
+    
+     
   }
 
   // Type guard to check if the event is an error event
@@ -57,8 +48,6 @@ export class GoogleAuthService {
   }
 
   logout(){
-
-    console.log("novi log out");
     this.oAuthService.revokeTokenAndLogout();
     this.oAuthService.logOut();
   }
@@ -69,5 +58,8 @@ export class GoogleAuthService {
 
   getToken(){
     return this.oAuthService.getAccessToken();
+  }
+  loggedIn(){
+    return this.getProfile() !=null; 
   }
 }

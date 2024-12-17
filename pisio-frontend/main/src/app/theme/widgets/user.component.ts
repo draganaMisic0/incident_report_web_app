@@ -17,17 +17,9 @@ import { GoogleAuthService } from 'app/routes/sessions/login/google-auth.service
     </button>
 
     <mat-menu #menu="matMenu">
-      <button routerLink="/profile/overview" mat-menu-item>
-        <mat-icon>account_circle</mat-icon>
-        <span>{{ 'profile' | translate }}</span>
-      </button>
-      <button routerLink="/profile/settings" mat-menu-item>
-        <mat-icon>edit</mat-icon>
-        <span>{{ 'edit_profile' | translate }}</span>
-      </button>
       <button mat-menu-item (click)="restore()">
-        <mat-icon>restore</mat-icon>
-        <span>{{ 'restore_defaults' | translate }}</span>
+        <mat-icon>settings_accessibility</mat-icon>
+        <span>{{ 'show_profile_info' | translate }}</span>
       </button>
       <button mat-menu-item (click)="logout()">
         <mat-icon>exit_to_app</mat-icon>
@@ -58,7 +50,8 @@ export class UserComponent implements OnInit {
     this.auth
       .user()
       .pipe(
-        tap(user => (this.user = user)),
+        tap(user => (
+          this.user = user)),
         debounceTime(10)
       )
       .subscribe(() => this.cdr.detectChanges());

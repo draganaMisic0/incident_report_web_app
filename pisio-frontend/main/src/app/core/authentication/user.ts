@@ -8,7 +8,7 @@ export const admin: User = {
 };
 
 export const guest: User = {
-  name: 'unknown',
-  email: 'unknown',
-  avatar: 'images/avatar-default.jpg',
+  name: 'anonymous',
+  email: 'anonymous',
+  avatar: 'images/guest-avatar.jpg',
 };

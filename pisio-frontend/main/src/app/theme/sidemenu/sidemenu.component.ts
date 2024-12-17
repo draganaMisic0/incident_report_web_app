@@ -17,6 +17,7 @@ import { MenuService } from '@core';
 import { NavAccordionItemDirective } from './nav-accordion-item.directive';
 import { NavAccordionToggleDirective } from './nav-accordion-toggle.directive';
 import { NavAccordionDirective } from './nav-accordion.directive';
+import { GoogleAuthService } from 'app/routes/sessions/login/google-auth.service';
 
 @Component({
   selector: 'app-sidemenu',
@@ -55,6 +56,7 @@ export class SidemenuComponent {
   @Input() ripple = false;
 
   private readonly menu = inject(MenuService);
+  public readonly authGoogle = inject(GoogleAuthService);
 
   menu$ = this.menu.getAll();
 

@@ -13,6 +13,8 @@ import { TablesDataService } from '../data.service';
 import { IncidentRequest } from 'app/models/incident_request';
 import { Incident } from 'app/models/incident';
 import { TablesRemoteDataService } from '../list-of-incidents/list-of-incidents.service';
+import { GoogleAuthService } from 'app/routes/sessions/login/google-auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-table-pending-incidents',
@@ -34,7 +36,8 @@ export class TablesKitchenSinkComponent implements OnInit {
   private readonly dataSrv = inject(TablesDataService);
   private readonly dialog = inject(MtxDialog);
   private readonly remoteSrv = inject(TablesRemoteDataService);
-  
+  private readonly authGoogle= inject(GoogleAuthService);
+  private readonly router = inject(Router);
 
   columns: MtxGridColumn[] = [
     
@@ -133,16 +136,19 @@ export class TablesKitchenSinkComponent implements OnInit {
 
   ngOnInit() {
 
+    if(!this.authGoogle.loggedIn()){
+      alert('User MUST be logged in to access.');
+      this.router.navigate(['/dashboard']);
+    }
     this.dataSrv.getData().subscribe(result => {this.list=result;});
     this.isLoading = false;
   }
 
   edit(id: number, incidentRequest: IncidentRequest) {
 
-    console.log("id"+id);
     this.dataSrv.update(id, incidentRequest ).subscribe();
     
-    this.dialog.alert("Incident "+id+" is approved and moved to list of incidents table.");
+    this.dialog.alert("Incident "+id+" is approved and moved to the 'List of incidents' table.");
    
 
    
@@ -154,6 +160,7 @@ export class TablesKitchenSinkComponent implements OnInit {
     
     this.dataSrv.delete(id).subscribe();
     this.dialog.alert(`Incident deleted!`);
+    this.refreshPage();
 
   }
 
@@ -178,5 +185,9 @@ export class TablesKitchenSinkComponent implements OnInit {
 
   updateList() {
     this.list = this.list.splice(-1).concat(this.list);
+  }
+
+  refreshPage() {
+    this.router.navigateByUrl('/tables/refresh');
   }
 }
